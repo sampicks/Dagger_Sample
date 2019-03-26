@@ -19,7 +19,7 @@ public class Car {
 
     /**
      * If we have constructor injection, field and method injection will be injected
-     * automatically in this order. constructor -> field -> method
+     * automatically in this order. 1)constructor  2)field  3)method
      */
     @Inject
     public void enableRemote(Remote remote) {

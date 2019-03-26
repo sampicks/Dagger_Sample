@@ -1,11 +1,11 @@
 package com.peeyoosh.dagger_sample.di;
 
 import com.peeyoosh.dagger_sample.MainActivity;
-import com.peeyoosh.dagger_sample.classes.Car;
 
 import dagger.Component;
 
-@Component
+
+@Component(modules = WheelModule.class)
 public interface CarComponent {
 
 //    Car getCar();
