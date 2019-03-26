@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.peeyoosh.dagger_sample.classes.Car;
 import com.peeyoosh.dagger_sample.di.CarComponent;
 import com.peeyoosh.dagger_sample.di.DaggerCarComponent;
+import com.peeyoosh.dagger_sample.di.DieselEngineModule;
 
 import javax.inject.Inject;
 
@@ -22,8 +23,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CarComponent carComponent = DaggerCarComponent.create();
-//      car = carComponent.getCar();
+        CarComponent carComponent = DaggerCarComponent.builder()
+                //since DieselEngineModule depends upon user input, we have to provide dependency like this way
+                .dieselEngineModule(new DieselEngineModule(100))
+                .build();
+
         carComponent.inject(this);
 
         car.drive();

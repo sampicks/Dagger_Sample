@@ -7,14 +7,14 @@ import javax.inject.Inject;
 public class Car {
     private static final String TAG = "Car";
 
-    @Inject
-    Engine engine;
+    private Engine engine;
     private Wheels wheels;
 
     // Car object can't be provided until we create an inject constructor or provides-method
     @Inject
-    public Car(Wheels wheels) {
+    public Car(Wheels wheels, Engine engine) {
         this.wheels = wheels;
+        this.engine = engine;
     }
 
     /**
@@ -27,6 +27,7 @@ public class Car {
     }
 
     public void drive() {
+        engine.startEngine();
         Log.d(TAG, "======== drive: ");
     }
 }
