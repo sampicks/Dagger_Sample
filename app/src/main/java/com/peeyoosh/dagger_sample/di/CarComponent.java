@@ -5,7 +5,7 @@ import com.peeyoosh.dagger_sample.MainActivity;
 import dagger.Component;
 
 
-@Component(modules = {WheelModule.class, DieselEngineModule.class})
+@Component(modules = {WheelModule.class, DieselEngineModule.class, PassengerModule.class})
 public interface CarComponent {
 
     void inject(MainActivity mainActivity);

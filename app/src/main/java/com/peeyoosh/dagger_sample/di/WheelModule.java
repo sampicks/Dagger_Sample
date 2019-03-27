@@ -12,7 +12,7 @@ import dagger.Provides;
  *
  */
 @Module
-public abstract class WheelModule {
+public class WheelModule {
 
     @Provides
     Rim provideRim() {
