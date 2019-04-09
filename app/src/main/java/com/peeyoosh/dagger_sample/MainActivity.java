@@ -1,15 +1,22 @@
 package com.peeyoosh.dagger_sample;
 
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.peeyoosh.dagger_sample.classes.Car;
+import com.peeyoosh.dagger_sample.di.AppModule;
 import com.peeyoosh.dagger_sample.di.CarComponent;
 import com.peeyoosh.dagger_sample.di.DaggerCarComponent;
 import com.peeyoosh.dagger_sample.di.DieselEngineModule;
 import com.peeyoosh.dagger_sample.di.PassengerModule;
-import com.peeyoosh.dagger_sample.di.WheelModule;
+//import com.peeyoosh.dagger_sample.di.CarComponent;
+//import com.peeyoosh.dagger_sample.di.DaggerCarComponent;
+//import com.peeyoosh.dagger_sample.di.DieselEngineModule;
+//import com.peeyoosh.dagger_sample.di.PassengerModule;
+//import com.peeyoosh.dagger_sample.di.WheelModule;
 
 import javax.inject.Inject;
 
@@ -22,16 +29,26 @@ public class MainActivity extends AppCompatActivity {
     Car car;
     @Inject
     String passenger;
+    @Inject
+    Resources resources;
+
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        textView = findViewById(R.id.txt_hello);
+        daggerInit();
+    }
+
+    private void daggerInit() {
         CarComponent carComponent = DaggerCarComponent.builder()
+                .appModule(new AppModule(this))
                 //since DieselEngineModule depends upon user input, we have to provide dependency like this way
                 .dieselEngineModule(new DieselEngineModule(100))
-                .passengerModule(new PassengerModule())
+//                .passengerModule(new PassengerModule())
 //                .wheelModule(new WheelModule())
                 .build();
 
@@ -39,5 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
         car.drive();
         Log.d(TAG, "====== " + passenger);
+        textView.setBackgroundColor(resources.getColor(R.color.colorAccent));
     }
 }
